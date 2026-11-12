@@ -1,0 +1,811 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080d19">
+    <title>RoFarm Service | Kế hoạch kinh doanh</title>
+
+    <style>
+        :root {
+            --bg: #080d19;
+            --surface: #111a2d;
+            --surface-2: #17233a;
+            --primary: #38bdf8;
+            --secondary: #818cf8;
+            --text: #edf4ff;
+            --muted: #94a3b8;
+            --border: rgba(148,163,184,.15);
+            --green: #34d399;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background:
+                radial-gradient(circle at 10% 0%, #142b4d 0, transparent 35%),
+                radial-gradient(circle at 90% 15%, #25204b 0, transparent 30%),
+                var(--bg);
+            color: var(--text);
+            line-height: 1.75;
+            padding: 35px 18px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1050px;
+            margin: auto;
+        }
+
+        /* HERO */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 65px 35px;
+            text-align: center;
+            background: linear-gradient(
+                135deg,
+                rgba(56,189,248,.13),
+                rgba(129,140,248,.13)
+            );
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            margin-bottom: 30px;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: var(--primary);
+            opacity: .08;
+            filter: blur(90px);
+            top: -100px;
+            left: -50px;
+        }
+
+        .logo {
+            display: inline-block;
+            padding: 7px 17px;
+            border-radius: 30px;
+            background: rgba(56,189,248,.12);
+            border: 1px solid rgba(56,189,248,.3);
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(27px, 5vw, 42px);
+            line-height: 1.3;
+            font-weight: 850;
+            background: linear-gradient(120deg, #38bdf8, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            color: var(--muted);
+            max-width: 650px;
+            margin: auto;
+            font-size: 15px;
+        }
+
+        /* OVERVIEW */
+
+        .overview {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .stat {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 22px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stat .number {
+            font-size: 25px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat .label {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 5px;
+        }
+
+        /* SECTION */
+
+        .section {
+            background: rgba(17,26,45,.92);
+            border: 1px solid var(--border);
+            border-radius: 17px;
+            padding: 28px;
+            margin-bottom: 20px;
+            transition: .25s ease;
+        }
+
+        .section:hover {
+            border-color: rgba(56,189,248,.5);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(0,0,0,.2);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding-bottom: 17px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .number-box {
+            width: 43px;
+            height: 43px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #0284c7, #6366f1);
+            color: white;
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .section-header h2 {
+            color: var(--primary);
+            font-size: 19px;
+            line-height: 1.4;
+        }
+
+        .section-header p {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 3px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .item {
+            background: rgba(23,35,58,.75);
+            border: 1px solid var(--border);
+            padding: 17px;
+            border-radius: 12px;
+        }
+
+        .item h3 {
+            font-size: 15px;
+            color: #e0eaff;
+            margin-bottom: 8px;
+        }
+
+        .item p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .item strong {
+            color: var(--text);
+        }
+
+        /* TABLE */
+
+        .table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-top: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 480px;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 13px 15px;
+            font-size: 14px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--surface-2);
+            color: var(--primary);
+        }
+
+        td {
+            color: var(--muted);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* HIGHLIGHT */
+
+        .highlight {
+            padding: 18px 20px;
+            border-left: 3px solid var(--green);
+            border-radius: 8px;
+            background: rgba(52,211,153,.07);
+            color: #cbd5e1;
+            font-size: 14px;
+            margin-top: 18px;
+        }
+
+        .highlight strong {
+            color: var(--green);
+        }
+
+        .warning {
+            border-left-color: #fbbf24;
+            background: rgba(251,191,36,.06);
+        }
+
+        .warning strong {
+            color: #fbbf24;
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            padding: 35px 15px 10px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        footer strong {
+            color: var(--primary);
+        }
+
+        .tag {
+            display: inline-block;
+            font-size: 11px;
+            color: var(--green);
+            background: rgba(52,211,153,.1);
+            border-radius: 20px;
+            padding: 3px 10px;
+            margin-bottom: 10px;
+        }
+
+        @media(max-width: 700px) {
+            body {
+                padding: 15px 10px;
+            }
+
+            .hero {
+                padding: 45px 18px;
+            }
+
+            .overview {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .stat {
+                padding: 15px;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 20px 16px;
+            }
+
+            .section-header h2 {
+                font-size: 16px;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: #172033;
+                padding: 0;
+            }
+
+            .hero, .section, .stat {
+                background: white;
+                color: #172033;
+                border: 1px solid #ddd;
+                box-shadow: none;
+                break-inside: avoid;
+            }
+
+            .hero h1 {
+                -webkit-text-fill-color: #1679b5;
+            }
+
+            .section-header h2,
+            .stat .number {
+                color: #1679b5;
+            }
+
+            .item {
+                background: #f5f7fa;
+            }
+
+            .item h3, .item strong {
+                color: #172033;
+            }
+
+            .item p, .stat .label, footer, td {
+                color: #475569;
+            }
+
+            .section:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- GIỚI THIỆU -->
+    <header class="hero">
+        <div class="logo">ROFARM SERVICE</div>
+
+        <h1>KẾ HOẠCH KINH DOANH</h1>
+
+        <p>
+            Dự án cung cấp dịch vụ hỗ trợ trải nghiệm,
+            hướng dẫn và tài nguyên trong các trò chơi Roblox.
+            Xây dựng mô hình kinh doanh trực tuyến với tiêu chí
+            uy tín, minh bạch và phát triển bền vững.
+        </p>
+    </header>
+
+    <!-- TỔNG QUAN -->
+    <div class="overview">
+
+        <div class="stat">
+            <div class="number">10K–50K</div>
+            <div class="label">Mức giá dịch vụ dự kiến (VNĐ)</div>
+        </div>
+
+        <div class="stat">
+            <div class="number">15–30</div>
+            <div class="label">Đơn hàng mục tiêu mỗi tháng</div>
+        </div>
+
+        <div class="stat">
+            <div class="number">400K–1.2M</div>
+            <div class="label">Doanh thu mục tiêu (VNĐ/tháng)</div>
+        </div>
+
+    </div>
+
+    <!-- BƯỚC 1 -->
+    <section class="section">
+
+        <div class="section-header">
+            <div class="number-box">01</div>
+            <div>
+                <h2>Xác định ý tưởng kinh doanh</h2>
+                <p>Business Idea</p>
+            </div>
+        </div>
+
+        <div class="content-grid">
+
+            <div class="item">
+                <h3>Sản phẩm và dịch vụ</h3>
+                <p>
+                    Cung cấp dịch vụ hướng dẫn chơi game, hỗ trợ
+                    hoàn thành nhiệm vụ, tư vấn xây dựng nhân vật,
+                    hướng dẫn săn vật phẩm và chia sẻ tài nguyên
+                    hợp lệ trong các trò chơi Roblox như
+                    <strong>Blox Fruits, Anime Defenders</strong>.
+                </p>
+            </div>
+
+            <div class="item">
+                <h3>Khách hàng mục tiêu</h3>
+                <p>
+                    Người chơi Roblox yêu thích trò chơi trực tuyến,
+                    muốn cải thiện kỹ năng, tiết kiệm thời gian
+                    và tìm kiếm những hướng dẫn phù hợp với nhu cầu.
+                </p>
+            </div>
+
+            <div class="item">
+                <h3>Phương thức kinh doanh</h3>
+                <p>
+                    Hoạt động chủ yếu trên Internet thông qua
+                    Discord, Facebook và TikTok để giới thiệu dịch vụ,
+                    tư vấn khách hàng và tiếp nhận yêu cầu.
+                </p>
+            </div>
+
+            <div class="item">
+                <h3>Nguồn gốc ý tưởng</h3>
+                <p>
+                    Xuất phát từ niềm đam mê Roblox, kinh nghiệm
+                    chơi game, khả năng tìm hiểu cơ chế trò chơi
+                    và nhu cầu hỗ trợ của cộng đồng người chơi.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- BƯỚC 2 -->
+    <section class="section">
+
+        <div class="section-header">
+            <div class="number-box">02</div>
+            <div>
+                <h2>Xác định mục tiêu kinh doanh</h2>
+                <p>Business Objectives</p>
+            </div>
+        </div>
+
+        <div class="content-grid">
+
+            <div class="item">
+                <span class="tag">NGẮN HẠN</span>
+                <h3>1 tháng – 1 năm</h3>
+                <p>
+                    Hoàn thiện quy trình cung cấp dịch vụ,
+                    đạt khoảng 15–30 đơn hàng mỗi tháng,
+                    hướng tới doanh thu 400.000–1.200.000 VNĐ/tháng
+                    và xây dựng ít nhất 30 đánh giá tích cực.
+                </p>
+            </div>
+
+            <div class="item">
+                <span class="tag">TRUNG HẠN</span>
+                <h3>2 – 5 năm</h3>
+                <p>
+                    Mở rộng dịch vụ sang nhiều trò chơi mới,
+                    phát triển cộng đồng khách hàng trung thành,
+                    xây dựng thương hiệu RoFarm Service
+                    trên Discord và TikTok.
+                </p>
+            </div>
+
+            <div class="item">
+                <span class="tag">DÀI HẠN</span>
+                <h3>Trên 5 năm</h3>
+                <p>
+                    Phát triển thành một thương hiệu dịch vụ số
+                    chuyên nghiệp, tối ưu quy trình vận hành
+                    và mở rộng quy mô hoạt động khi đủ điều kiện.
+                </p>
+            </div>
+
+            <div class="item">
+                <span class="tag">NGUYÊN TẮC</span>
+                <h3>Định hướng phát triển</h3>
+                <p>
+                    Ưu tiên chất lượng dịch vụ, bảo vệ quyền lợi
+                    khách hàng, minh bạch giá cả và tuân thủ
+                    quy định của nền tảng.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- BƯỚC 3 -->
+    <section class="section">
+
+        <div class="section-header">
+            <div class="number-box">03</div>
+            <div>
+                <h2>Phân tích các điều kiện thực hiện</h2>
+                <p>Market & Resource Analysis</p>
+            </div>
+        </div>
+
+        <div class="content-grid">
+
+            <div class="item">
+                <h3>Sản phẩm và giá cả</h3>
+                <p>
+                    Xây dựng các gói dịch vụ từ 10.000–50.000 VNĐ
+                    tùy độ khó và thời gian thực hiện.
+                    Công khai bảng giá để khách hàng dễ lựa chọn.
+                </p>
+            </div>
+
+            <div class="item">
+                <h3>Thị trường khách hàng</h3>
+                <p>
+                    Hướng đến cộng đồng người chơi Roblox,
+                    đặc biệt là nhóm khách hàng trẻ có nhu cầu
+                    tìm hiểu, học cách chơi và cải thiện kỹ năng.
+                </p>
+            </div>
+
+            <div class="item">
+                <h3>Đối thủ cạnh tranh</h3>
+                <p>
+                    Các cộng đồng hướng dẫn game, kênh nội dung
+                    Roblox và những đơn vị cung cấp dịch vụ
+                    hỗ trợ người chơi trực tuyến.
+                </p>
+            </div>
+
+            <div class="item">
+                <h3>Lợi thế cạnh tranh</h3>
+                <p>
+                    Chi phí khởi đầu thấp, am hiểu trò chơi,
+                    giao tiếp thân thiện, hỗ trợ nhanh chóng
+                    và có thể xây dựng dịch vụ theo nhu cầu.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="highlight">
+            <strong>Điều kiện cần thiết:</strong>
+            Có thiết bị kết nối Internet, kiến thức về game,
+            kỹ năng giao tiếp, thời gian phù hợp và sự hỗ trợ
+            của phụ huynh khi cần thiết.
+        </div>
+    </section>
+
+    <!-- BƯỚC 4 -->
+    <section class="section">
+
+        <div class="section-header">
+            <div class="number-box">04</div>
+            <div>
+                <h2>Xác định chiến lược kinh doanh</h2>
+                <p>Business Strategy</p>
+            </div>
+        </div>
+
+        <div class="content-grid">
+
+            <div class="item">
+                <h3>Chiến lược cung cấp dịch vụ</h3>
+                <p>
+                    Tiếp nhận yêu cầu, tư vấn gói dịch vụ,
+                    xác nhận giá và thời gian hoàn thành,
+                    thực hiện hỗ trợ rồi ghi nhận phản hồi.
+                </p>
+            </div>
+
+            <div class="item">
+                <h3>Chiến lược tiếp thị</h3>
+                <p>
+                    Đăng video hướng dẫn trên TikTok và YouTube Shorts,
+                    chia sẻ kinh nghiệm chơi game, giới thiệu
+                    dịch vụ và triển khai ưu đãi khai trương.
+                </p>
+            </div>
+
+            <div class="item">
+                <h3>Chiến lược tài chính</h3>
+                <p>
+                    Tận dụng thiết bị sẵn có để giảm chi phí.
+                    Theo dõi doanh thu, chi phí Internet,
+                    chi phí quảng bá và các khoản phát sinh.
+                    Dành một phần tiền làm vốn dự phòng.
+                </p>
+            </div>
+
+            <div class="item">
+                <h3>Chiến lược nhân sự</h3>
+                <p>
+                    Ban đầu tự quản lý và thực hiện công việc.
+                    Khi lượng khách tăng, có thể hợp tác
+                    với người có kinh nghiệm và phân chia
+                    nhiệm vụ phù hợp.
+                </p>
+            </div>
+
+        </div>
+
+        <h3 style="margin-top:25px; color:var(--primary);">
+            Dự kiến phân bổ tài chính
+        </h3>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Khoản mục</th>
+                        <th>Tỷ lệ dự kiến</th>
+                        <th>Mục đích</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Chi phí vận hành</td>
+                        <td>20%</td>
+                        <td>Internet và chi phí phát sinh</td>
+                    </tr>
+
+                    <tr>
+                        <td>Quảng bá</td>
+                        <td>20%</td>
+                        <td>Tiếp cận khách hàng mới</td>
+                    </tr>
+
+                    <tr>
+                        <td>Tiết kiệm và dự phòng</td>
+                        <td>30%</td>
+                        <td>Duy trì hoạt động lâu dài</td>
+                    </tr>
+
+                    <tr>
+                        <td>Lợi nhuận giữ lại</td>
+                        <td>30%</td>
+                        <td>Tích lũy và phát triển dịch vụ</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="highlight">
+            <strong>Lưu ý:</strong>
+            Đây là tỷ lệ phân bổ tham khảo trên doanh thu,
+            cần điều chỉnh theo chi phí thực tế.
+            Doanh thu không đồng nghĩa với lợi nhuận.
+        </div>
+    </section>
+
+    <!-- BƯỚC 5 -->
+    <section class="section">
+
+        <div class="section-header">
+            <div class="number-box">05</div>
+            <div>
+                <h2>Đánh giá cơ hội, rủi ro và biện pháp xử lý</h2>
+                <p>Risk Management</p>
+            </div>
+        </div>
+
+        <div class="content-grid">
+
+            <div class="item">
+                <h3>Cơ hội kinh doanh</h3>
+                <p>
+                    Roblox có cộng đồng người chơi lớn,
+                    nhiều trò chơi được cập nhật thường xuyên,
+                    tạo cơ hội phát triển nội dung hướng dẫn
+                    và dịch vụ hỗ trợ.
+                </p>
+            </div>
+
+            <div class="item">
+                <h3>Rủi ro cạnh tranh</h3>
+                <p>
+                    Nhiều cá nhân và cộng đồng cùng cung cấp
+                    dịch vụ tương tự. Cần nâng cao chất lượng,
+                    giữ giá hợp lý và xây dựng uy tín lâu dài.
+                </p>
+            </div>
+
+            <div class="item">
+                <h3>Rủi ro bảo mật</h3>
+                <p>
+                    Có thể xảy ra lộ thông tin hoặc tranh chấp
+                    tài khoản. Không yêu cầu mật khẩu, mã xác thực
+                    hoặc thông tin đăng nhập của khách hàng.
+                </p>
+            </div>
+
+            <div class="item">
+                <h3>Rủi ro thanh toán</h3>
+                <p>
+                    Có thể xảy ra tình trạng khách hàng
+                    không thanh toán hoặc tranh chấp đơn hàng.
+                    Cần xác nhận rõ nội dung, giá và điều kiện
+                    trước khi cung cấp dịch vụ.
+                </p>
+            </div>
+
+            <div class="item">
+                <h3>Rủi ro ảnh hưởng học tập</h3>
+                <p>
+                    Dành quá nhiều thời gian kinh doanh
+                    có thể ảnh hưởng đến việc học.
+                    Cần giới hạn số đơn và chỉ làm việc
+                    trong thời gian rảnh.
+                </p>
+            </div>
+
+            <div class="item">
+                <h3>Rủi ro từ nền tảng</h3>
+                <p>
+                    Một số hình thức giao dịch hoặc dịch vụ
+                    có thể không được nền tảng cho phép.
+                    Cần kiểm tra điều khoản Roblox và chỉ
+                    cung cấp dịch vụ phù hợp quy định.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="highlight warning">
+            <strong>Nguyên tắc an toàn:</strong>
+            Không mua bán tài khoản trái quy định, không sử dụng
+            phần mềm gian lận, không thu thập thông tin đăng nhập
+            và không thực hiện giao dịch có nguy cơ gây thiệt hại
+            cho người chơi.
+        </div>
+    </section>
+
+    <!-- KẾT LUẬN -->
+    <section class="section">
+
+        <div class="section-header">
+            <div class="number-box">✓</div>
+            <div>
+                <h2>Kết luận và định hướng phát triển</h2>
+                <p>Conclusion</p>
+            </div>
+        </div>
+
+        <p style="color:var(--muted); font-size:15px;">
+            RoFarm Service là ý tưởng kinh doanh trực tuyến
+            có thể bắt đầu với quy mô nhỏ và tận dụng những
+            nguồn lực sẵn có. Dự án hướng đến việc cung cấp
+            dịch vụ hỗ trợ người chơi Roblox một cách minh bạch,
+            an toàn và có trách nhiệm.
+        </p>
+
+        <p style="color:var(--muted); font-size:15px; margin-top:12px;">
+            Trong tương lai, dự án sẽ tập trung nâng cao chất lượng
+            dịch vụ, mở rộng cộng đồng khách hàng, quản lý tài chính
+            hiệu quả và cân bằng giữa hoạt động kinh doanh
+            với việc học tập.
+        </p>
+
+        <div class="highlight">
+            <strong>Thông điệp:</strong>
+            Uy tín tạo niềm tin – Chất lượng tạo giá trị –
+            Trách nhiệm tạo nên sự phát triển bền vững.
+        </div>
+
+    </section>
+
+    <footer>
+        <strong>ROFARM SERVICE</strong>
+        <p>Kế hoạch kinh doanh dự án cá nhân</p>
+        <p>2026 · Quality · Trust · Development</p>
+    </footer>
+
+</div>
+
+</body>
+</html>
